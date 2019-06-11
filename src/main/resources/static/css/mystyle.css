@@ -1,0 +1,15 @@
+@charset "ISO-8859-1";
+
+.nopadding {
+ .nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+@media (max-width: 600px) {
+  .navbar-layout {
+    display: none;
+  }
+}
+
+}

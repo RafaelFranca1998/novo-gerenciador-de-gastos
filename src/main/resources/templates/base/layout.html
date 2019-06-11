@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8">
+<title>Gerenciamento de Gastos</title>
+<!-- Custom fonts for this template-->
+<link href="../../vendor/fontawesome-free/css/all.min.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+<link href="../../css/mystyle.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container-fluid" style="
+    padding-left: 0px;
+    padding-right: 0px;">
+    
+		<div id="layout-1" class="wrapper"
+			style="padding-left: 0px; padding-right: 0px;">
+			<div id="layout-2" class="container-fluid row" style="margin-left: 0px;margin-right: 0px;padding-left: 0px; padding-right: 0px;">
+				<!-- col-sm-2 col-md-2 col-lg-2 col-xl-2 -->
+				<!-- style="padding-left: 0px; padding-right: 0px;" -->
+				<div id="navbar-layout" class="col-sm-3 col-md-4 col-lg-3 col-xl-2" style="padding-left: 0px;">
+					<div th:include="base/menu :: menu"></div>
+				</div>
+				<div class="col-sm-9 col-md-8 col-lg-9 col-xl-10">
+					<div class="row">
+						<div th:include="base/topbar :: topbar"
+							class="container-fluid"></div>
+						<!-- <div layout:fragment="content"></div> -->
+						Corpo da página
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- /.content-wrapper -->
+
+	<!-- <footer th:replace="base/footer : footer"> </footer> -->
+
+	<!-- Bootstrap core JavaScript-->
+	<script src="../../vendor/jquery/jquery.min.js"></script>
+	<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="../../js/sb-admin-2.min.js"></script>
+
+	<!-- Page level plugins -->
+	<script src="../../vendor/chart.js/Chart.min.js"></script>
+
+	<!-- Page level custom scripts -->
+	<script src="../../js/demo/chart-area-demo.js"></script>
+	<script src="../../js/demo/chart-pie-demo.js"></script>
+
+	<script>
+		$("#sidebarToggle, #sidebarToggleTop ")
+				.click(
+						function() {
+							$("#navbar-layout").toggleClass(
+									'col-sm-2 col-md-2 col-lg-3 col-xl-3');
+							if (("#content").hasClass("toggled")) {
+								$("#content")
+										.toggleClass(
+												'toggled col-xm-2 col-sm-10 col-md-8 col-lg-9 col-xl-10');
+							} else {
+								$("#content")
+										.toggleClass(
+												'toggled col-xm-0 col-sm-0 col-md-0 col-lg-0 col-xl-0');
+							}
+						});
+
+		/* 	$(document).ready(function(){						
+			    if ($(window).width() < 600) {
+			        $('#navbar-layout').hide();
+			    } else {
+			        $('#navbar-layout').show();
+			    }
+			}); */
+		$(window).resize(function() {
+			if ($(window).width() < 600) {
+				$('#navbar-layout').hide();
+			} else {
+				$('#navbar-layout').show();
+			}
+		});
+	</script>
+
+
+</body>
+</html>
