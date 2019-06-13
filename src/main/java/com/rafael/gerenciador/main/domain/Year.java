@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,7 +25,7 @@ public class Year extends  AbstractEntity<Long> {
 	@Column(name = "id_year")
 	private Long idYear;
 
-	@OneToMany(mappedBy = "month")
+	@OneToMany
 	private List<Month> month;
 
 	public int getYear() {

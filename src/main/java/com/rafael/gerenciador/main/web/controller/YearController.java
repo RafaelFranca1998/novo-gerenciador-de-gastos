@@ -13,5 +13,14 @@ public class YearController {
 		return "/year/list";
 	}
 	
+	@GetMapping("/add")
+	public String add() {
+		return "/year/add";
+	}
+	
+	@GetMapping("/save")
+	public String save() {
+		return "/year/add";
+	}
 	
 }

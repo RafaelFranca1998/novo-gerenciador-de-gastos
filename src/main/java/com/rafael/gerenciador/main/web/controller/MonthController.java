@@ -13,5 +13,8 @@ public class MonthController {
 		return "/month/list";
 	}
 	
-	
+	@GetMapping("/add")
+	public String add() {
+		return "/list/add";
+	}
 }
