@@ -1,28 +1,41 @@
-package com.rafael.gerenciador.main.domain;
+package com.rafael.gerenciador.main.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "YEAR")
-public class Year extends  AbstractEntity<Long> {
+public class Year {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+	private static ArrayList<Year> YEARLIST;
+	
+
+	static public ArrayList<Year> getYEARLIST() {
+		YEARLIST = new ArrayList<Year>();
+		for (int i = 2016; i < 3000; i++) {
+			Year year =  new Year();
+			year.setYear(i);
+			YEARLIST.add(year);
+		}
+		
+		return YEARLIST;
+	}
 
 	@Column(name = "year", nullable = false, unique = true, length = 4)
 	private int year;
 
 	@Id
 	@Column(name = "id_year")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idYear;
 
 	@OneToMany
@@ -43,5 +56,7 @@ public class Year extends  AbstractEntity<Long> {
 	public void setIdYear(Long idYear) {
 		this.idYear = idYear;
 	}
+	
+	
 
 }

@@ -1,10 +1,16 @@
 package com.rafael.gerenciador.main.repository;
 
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
-@Repository
-public interface ItemRepository extends JpaRepository<Item, Long>  {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.rafael.gerenciador.main.entity.Items;
+
+
+public interface ItemRepository extends JpaRepository<Items, Long> {
+	
+	List<Items> findAll();
+	
+	//List<Items> findByName(String nome);
 
 }

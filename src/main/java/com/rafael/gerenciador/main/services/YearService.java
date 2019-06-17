@@ -1,20 +1,30 @@
 package com.rafael.gerenciador.main.services;
 
-import java.util.List;
+import org.springframework.stereotype.Component;
 
-import com.rafael.gerenciador.main.domain.Year;
+import com.rafael.gerenciador.main.entity.Year;
+import com.rafael.gerenciador.main.repository.YearRepository;
+import com.rafael.gerenciador.main.services.utils.CrudService;
 
-public interface YearService {
-	
-	void salvar(Year year );
-	
-	void editar(Year year);
-	
-	void excluir(Long id);
-	
-	Year buscarPorId(Long id);
-	
-	List<Year> buscarTodos();
 
-	boolean depertamentoTemCargos(Long id);
+@Component
+public class YearService extends CrudService<Year, YearRepository , Long> {
+
+	public boolean saveYear(Year year) {
+		try {
+		insert(year);
+		return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	@Override
+	protected void updateData(Year currentObj, Year newObj) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }

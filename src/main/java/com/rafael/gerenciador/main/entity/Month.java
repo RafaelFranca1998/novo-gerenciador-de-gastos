@@ -1,14 +1,14 @@
-package com.rafael.gerenciador.main.domain;
+package com.rafael.gerenciador.main.entity;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,30 +18,30 @@ import org.springframework.format.annotation.NumberFormat.Style;
 
 @Entity
 @Table(name = "MONTH ")
-public class Month extends AbstractEntity<Long> {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Month {
+
 
 	public static final String[] MONTHLIST = { "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
 			"Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" };
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_month")
 	private Long idMonth;
 
 	@Column(name = "fk_year")
-	private int idYear;
+	private Long idYear;
 
 	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
 	@Column(name = "received", nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private int received;
+	private BigDecimal received;
 	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
 	@Column(name = "previous", nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private int previous;
-
+	private BigDecimal previous;
+	
+	@ManyToOne
+	private Year year; 
+	
 	@Column(name = "month_name")
 	private String monthName;
 	
@@ -74,5 +74,113 @@ public class Month extends AbstractEntity<Long> {
 			return literalForm;
 		}
 
+//		public ArrayList<Month> getAsArray(){
+//			ArrayList<Month> list =  new ArrayList<>() ;
+//			for (int i = 0; i < MonthList.values().length; i++) {
+//
+//			}
+//			
+//		}
+		
 	}
+
+
+
+
+	public Long getIdMonth() {
+		return idMonth;
+	}
+
+
+
+
+	public void setIdMonth(Long idMonth) {
+		this.idMonth = idMonth;
+	}
+
+
+
+
+	public Long getIdYear() {
+		return idYear;
+	}
+
+
+
+
+	public void setIdYear(Long idYear) {
+		this.idYear = idYear;
+	}
+
+
+
+
+	public BigDecimal getReceived() {
+		return received;
+	}
+
+
+
+
+	public void setReceived(BigDecimal received) {
+		this.received = received;
+	}
+
+
+
+
+	public BigDecimal getPrevious() {
+		return previous;
+	}
+
+
+
+
+	public void setPrevious(BigDecimal previous) {
+		this.previous = previous;
+	}
+
+
+
+
+	public Year getYear() {
+		return year;
+	}
+
+
+
+
+	public void setYear(Year year) {
+		this.year = year;
+	}
+
+
+
+
+	public String getMonthName() {
+		return monthName;
+	}
+
+
+
+
+	public void setMonthName(String monthName) {
+		this.monthName = monthName;
+	}
+
+
+
+
+	public List<Items> getItems() {
+		return items;
+	}
+
+
+
+
+	public void setItems(List<Items> items) {
+		this.items = items;
+	}
+	
+	
 }
