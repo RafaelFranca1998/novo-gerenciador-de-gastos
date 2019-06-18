@@ -1,7 +1,6 @@
 package com.rafael.gerenciador.main.entity;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,11 +12,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
 @Entity
 @Table(name = "MONTH ")
+@ComponentScan
 public class Month {
 
 
@@ -45,11 +46,8 @@ public class Month {
 	@Column(name = "month_name")
 	private String monthName;
 	
-	/* (mappedBy = "items",cascade = CascadeType.ALL) */
 	@OneToMany
 	private List<Items> items;
-	
-	
 	
 
 	public enum MonthList {

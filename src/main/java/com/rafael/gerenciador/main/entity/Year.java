@@ -11,8 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.ComponentScan;
+
 @Entity
 @Table(name = "YEAR")
+@ComponentScan
 public class Year {
 
 

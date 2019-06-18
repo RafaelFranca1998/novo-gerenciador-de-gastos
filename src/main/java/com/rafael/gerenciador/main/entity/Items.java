@@ -8,11 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
 @Entity
 @Table(name = "ITEMS")
+@ComponentScan
 public class Items {
 
 	@Id
@@ -30,7 +32,7 @@ public class Items {
 	private int plots;
 
 	@ManyToOne
-	private Items items;
+	private Month month;
 
 	public Long getIdItems() {
 		return idItems;
@@ -56,11 +58,6 @@ public class Items {
 		this.value = value;
 	}
 
-	/*
-	 * public int getIdMonth() { return idMonth; }
-	 * 
-	 * public void setIdMonth(int idMonth) { this.idMonth = idMonth; }
-	 */
 	public int getPlots() {
 		return plots;
 	}
