@@ -19,16 +19,16 @@
 	<div id="wrapper">
 		<div th:replace="base/menu :: menu"></div>
 		<!-- Content Wrapper -->
-		<div id="content-wrapper" class="d-flex flex-column">
+		<div id="content-wrapper" >
 			<!-- Main Content -->
-			<div id="content">
-				<div th:replace="base/topbar :: topbar"></div>
-				<!-- Begin Page Content -->
-				<div class="container-fluid">
-					<div layout:fragment="content">Corpo da página</div>
+				<div id="content">
+					<div th:replace="base/topbar :: topbar"></div>
+					<!-- Begin Page Content -->
+					<div class="container-fluid">
+						<div layout:fragment="content">Corpo da página</div>
+					</div>
 				</div>
-			</div>
-				<div th:replace="base/footer :: footer"></div>
+			<div th:replace="base/footer :: footer"></div>
 		</div>
 	</div>
 

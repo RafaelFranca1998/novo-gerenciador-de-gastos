@@ -3,13 +3,7 @@ package com.rafael.gerenciador.main.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.context.annotation.ComponentScan;
 
@@ -18,10 +12,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan
 public class Year {
 
-
 	private static ArrayList<Year> YEARLIST;
 	
-
 	static public ArrayList<Year> getYEARLIST() {
 		YEARLIST = new ArrayList<Year>();
 		for (int i = 2016; i < 3000; i++) {
@@ -41,7 +33,7 @@ public class Year {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idYear;
 
-	@OneToMany
+	@OneToMany(mappedBy="year")
 	private List<Month> month;
 
 	public int getYear() {
@@ -59,7 +51,12 @@ public class Year {
 	public void setIdYear(Long idYear) {
 		this.idYear = idYear;
 	}
-	
-	
 
+	public List<Month> getMonth() {
+		return month;
+	}
+
+	public void setMonth(List<Month> month) {
+		this.month = month;
+	}
 }

@@ -40,15 +40,15 @@ public class MonthController {
 	public ModelAndView add(Model model, HttpSession session, @ModelAttribute("month") Month month, RedirectAttributes attr) {
 		ArrayList<Year>yearList = new ArrayList<>(yearService.findAll());
 		MonthList[]monthList =  Month.MonthList.values();
-		
-		model.addAttribute("month",new Month());
+
+		model.addAttribute("month",new Month(""));
 		model.addAttribute("yearList",yearList);
 		model.addAttribute("monthList",monthList);
 		return  new  ModelAndView("/month/add");
 	}
 	
 	@PostMapping("/save")
-	public String save(Model model, HttpSession session, @ModelAttribute("month") Month month, RedirectAttributes attr) {
+	public String save(@ModelAttribute("month") Month month, RedirectAttributes attr) {
 		
 		if (monthService.saveMonth(month)) {
 			attr.addFlashAttribute("success", "Mês inserido com sucesso.");

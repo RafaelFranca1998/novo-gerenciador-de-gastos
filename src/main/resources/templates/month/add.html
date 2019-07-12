@@ -25,18 +25,26 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<script src="https://unpkg.com/bootstrap-table@1.15.2/dist/bootstrap-table.min.js"></script>
+
 
 <!-- Custom styles for this template-->
 <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+
+<link href="../../css/bootstrap-table.min.css" rel="stylesheet">
 
 
 
 <script src="../../js/jquery.maskMoney.min.js" type="text/javascript"></script>
 
+<script src="../../js/bootstrap-table.min.js" type="text/javascript"></script>
+
+
 
 </head>
 
-<body class="">
+<body class=""  th:with="test= ${#httpServletRequest.getAttribute('test')}">
+
 	<!-- Main Content -->
 	<div layout:fragment="content" id="content">
 		<!--==========================================================	PAGINA AQUI ========================================================================-->
@@ -57,7 +65,7 @@
 					</nav>
 				</div>
 				<br> <br>
-				<div class="container card" style="padding: 20px;" id="year" name="year">
+				<div class="container card" style="padding: 20px;" >
 					<div class="container-fluid">
 						<div th:replace="base/alert"></div>
 						<form th:action="@{/month/save}" th:object="${month}"
@@ -67,9 +75,9 @@
 									<div class="form-group">
 										<label for="parcelas">Ano</label>
 										<div class="form-group">
-											<select id="year" class="form-control"
-												th:field="*{idYear}"
-												onchange="loadMonth(this.value);" >
+											<select th:field="*{year}" class="form-control"
+												onchange="refreshTable(this.value);"
+												 >
 												<option value="-1">Selecione...</option>
 												<option th:each="y : ${yearList}" th:value="${y.idYear}"
 													th:text="${y.year}"></option>
@@ -108,47 +116,71 @@
 						</form>
 					</div>
 				</div>
-			</section>
-			<script th:inline="javascript" type="text/javascript">
+				<table id="table">
+				</table>
+			<div id="divtable" class="card" style="padding: 15px; margin: 15px;">
+			<table id="mytable"
+				   name="mytable"
+				   data-toggle="table"
 
-	function loadMonth(idYear) {  
-		$.ajax({
-	        type: "get",
-	        url: [[@{/rest/year/}]] + idYear + '/month',
-	        success: function (data) {
-	            if (data != null) {
-	                var selectbox = $('#month');
-	                selectbox.find('option').remove();
-	                $('<option>').val("").text("Select...").appendTo(selectbox);
-	                $.each(data, function (i, d) {
-	                    $('<option>').val(d.idSubCategory).text(d.stSubCategory).appendTo(selectbox);
-	                });
-	            }
-	        },
-	        error : function(jqXHR, textStatus, msg){
-        	  alert("Error " +textStatus+ ": "+ msg);
-	      }
-	    });
-	}
-	
-	
-	$(document).ready(function(){
-	$('.money').mask('#.##0,00', { reverse: true });
-	$('#currency').maskMoney();
-	})
-	</script>
+			       th:data-url="@{/rest/month/table}"
+			       data-toolbar="#toolbar"
+			       data-pagination="true"
+			       data-side-pagination="server"
+			       data-data-field="content"
+			       data-total-field="totalElements"
+			       data-silent-sort="false"
+			       data-query-params-type=""
+			       data-detail-view="true"
+			       data-show-refresh="true"
+			       data-detail-formatter="detailProject">
+						<thead>
+							<tr>
+								<th scope="col" data-field="idMonth">#</th>
+								<th scope="col" data-field="monthName">Mês</th>
+								<th scope="col" data-field="received">Recebido</th>
+								<th scope="col" data-field="previous">Saldo Anterior</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
 
-		</div>
-	</div>
-	<script src="../../js/jquery.mask.js" type="text/javascript"></script>
+				<script src="../../static/vendor/js/jquery.mask.js" type="text/javascript"></script>
 	<!-- Bootstrap core JavaScript-->
-	<script src="../../vendor/jquery/jquery.min.js"></script>
-	<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="../../static/vendor/jquery/jquery.min.js"></script>
+	<script src="../../static/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<!-- Core plugin JavaScript-->
-	<script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+	<script src="../../static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 	<!-- Custom scripts for all pages-->
-	<script src="../../js/sb-admin-2.min.js"></script>
+	<script src="../../static/js/sb-admin-2.min.js"></script>
+		<script th:inline="javascript" type="text/javascript">
+
+ 		function refreshTable(idYear) {
+			alert("Aqui")
+				$('#table').bootstrapTable({
+					method: 'get',
+					url: [[@{/rest/month/}]] + idYear + '/table',
+					clickToSelect: true,
+					columns: [{
+							checkbox: true
+						},
+						{
+							field: "name",
+							title: "lon"
+						},
+						{
+							field: "customID",
+							title: "level"
+						}
+					]
+				});
+			}
+
+	</script>
+			</section>
+		</div>
+	</div>
 </body>
 
 </html>
